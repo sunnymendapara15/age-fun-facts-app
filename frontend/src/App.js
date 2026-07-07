@@ -64,7 +64,19 @@ function App() {
         body: JSON.stringify({ birthdate }),
       });
 
-      const data = await response.json();
+      const contentType = response.headers.get('content-type') || '';
+      const isJson = contentType.includes('application/json');
+
+      let data;
+      if (isJson) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        throw new Error(
+          `Server returned unexpected content: ${text.trim().slice(0, 300)}${text.length > 300 ? '…' : ''}`
+        );
+      }
+
       if (!response.ok) {
         throw new Error(data.detail || 'Unable to calculate your age right now.');
       }
