@@ -1,0 +1,16 @@
+# Frontend
+/frontend/node_modules
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.production.local
+/frontend/.cache
+
+# Backend
+/backend/__pycache__
+/backend/.env
+
+# General
+.env
+*.pyc
+__pycache__
+
